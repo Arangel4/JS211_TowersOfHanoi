@@ -30,27 +30,68 @@ const printStacks = () => {
 }
 
 // Next, what do you think this function should do?
-const movePiece = () => {
-  // Your code here
-
+const movePiece = (startStack, endStack) => {
+  if (isLegal(startStack, endStack) === true ) {
+    let removed = stacks[startStack].pop();
+    return stacks[endStack].push(removed);
+  } 
+  else if (isLegal(startStack, endStack) === false) 
+  {
+    console.log("Move is not valid! You can not stack a larger block on top of a smaller one.");
+    console.log("Try Again");
+  }
 }
 
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2
-const isLegal = () => {
-  // Your code here
+const isLegal = (startStack, endStack) => {
+  if (stacks[endStack][stacks[endStack].length - 1] === undefined)
+  {
+    return true;
+  }
+  if (stacks[startStack][stacks[startStack].length - 1] < stacks[endStack][stacks[endStack].length - 1]) {
+    return true;
+  } else if (stacks[startStack][stacks[startStack].length - 1] > stacks[endStack][stacks[endStack].length - 1]) {
+    return false;
+  }
 
 }
 
 // What is a win in Towers of Hanoi? When should this function run?
 const checkForWin = () => {
-  // Your code here
+  const winningArray = [4, 3, 2, 1];
 
+  for (let i = 0; i < winningArray.length; i++) {
+    if(stacks.b.length === winningArray.length || stacks.c.length === winningArray.length) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 // When is this function called? What should it do with its argument?
 const towersOfHanoi = (startStack, endStack) => {
-  // Your code here
-
+  if (startStack === 'a' && endStack === 'b') {
+    console.log(`You have picked stack ${startStack} & ${endStack}`);
+  }
+  else if (startStack === 'a' && endStack === 'c') {
+    console.log(`You have picked stack ${startStack} & ${endStack}`);
+  }
+  else if (startStack === 'b' && endStack === 'a') {
+    console.log(`You have picked stack ${startStack} & ${endStack}`);
+  }
+  else if (startStack === 'b' && endStack === 'c') {
+    console.log(`You have picked stack ${startStack} & ${endStack}`);
+  }
+  else if (startStack === 'c' && endStack === 'a') {
+    console.log(`You have picked stack ${startStack} & ${endStack}`);
+  }
+  else if (startStack === 'c' && endStack === 'b') {
+    console.log(`You have picked stack ${startStack} & ${endStack}`);
+  }
+  isLegal(startStack, endStack);
+  movePiece(startStack, endStack);
+  checkForWin();
 }
 
 const getPrompt = () => {
@@ -58,7 +99,7 @@ const getPrompt = () => {
   rl.question('start stack: ', (startStack) => {
     rl.question('end stack: ', (endStack) => {
       towersOfHanoi(startStack, endStack);
-      getPrompt();
+      // getPrompt();
     });
   });
 }
