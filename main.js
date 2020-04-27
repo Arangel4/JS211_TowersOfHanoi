@@ -29,7 +29,7 @@ const printStacks = () => {
   console.log("c: " + stacks.c);
 }
 
-// Next, what do you think this function should do?
+// Whenever movePiece() executes it will move the choosen block from one stack to another. Although, in order for a block to move isLegal needs to be true, otherwise it will let the user know their move is invalid and ask them to try again.
 const movePiece = (startStack, endStack) => {
   if (isLegal(startStack, endStack) === true ) {
     let removed = stacks[startStack].pop();
@@ -43,20 +43,27 @@ const movePiece = (startStack, endStack) => {
 }
 
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2
+// isLegal() checks if the move the user makes is valid.
 const isLegal = (startStack, endStack) => {
+  // if the user moves a block to a stack that is empty it will return true. The move is valid.
   if (stacks[endStack][stacks[endStack].length - 1] === undefined)
   {
     return true;
   }
+  // if the block the user is moving is smaller than the block in the stack they are moving it to, it will return true. The move is valid.
   if (stacks[startStack][stacks[startStack].length - 1] < stacks[endStack][stacks[endStack].length - 1]) {
     return true;
-  } else if (stacks[startStack][stacks[startStack].length - 1] > stacks[endStack][stacks[endStack].length - 1]) {
+  } 
+  // Finally, if the block the user is moving is larger than the block in the stack they are trying to move it to, it will return false, The move is invalid.
+  else if (stacks[startStack][stacks[startStack].length - 1] > stacks[endStack][stacks[endStack].length - 1]) {
     return false;
   }
 
 }
 
 // What is a win in Towers of Hanoi? When should this function run?
+// checkForWin() will return true if stack b or stack c equal the winningArray. 
+// If so, the user wins.
 const checkForWin = () => {
   const winningArray = [4, 3, 2, 1];
 
@@ -70,6 +77,7 @@ const checkForWin = () => {
 }
 
 // When is this function called? What should it do with its argument?
+// Will 
 const towersOfHanoi = (startStack, endStack) => {
   if (startStack === 'a' && endStack === 'b') {
     console.log(`You have picked stack ${startStack} & ${endStack}`);
