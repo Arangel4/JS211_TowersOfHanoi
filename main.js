@@ -77,7 +77,7 @@ const checkForWin = () => {
 }
 
 // When is this function called? What should it do with its argument?
-// Will 
+// towerOfHanoi will take the user's input and figure out which stacks they picked.
 const towersOfHanoi = (startStack, endStack) => {
   if (startStack === 'a' && endStack === 'b') {
     console.log(`You have picked stack ${startStack} & ${endStack}`);
@@ -97,6 +97,7 @@ const towersOfHanoi = (startStack, endStack) => {
   else if (startStack === 'c' && endStack === 'b') {
     console.log(`You have picked stack ${startStack} & ${endStack}`);
   }
+  // runs through all of the functions.
   isLegal(startStack, endStack);
   movePiece(startStack, endStack);
   checkForWin();
